@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Jacek Bzdak <jacek@askesis.pl>
+  description: Provisions a superuser
+
+  license: BSD
+
+  min_ansible_version: 2.2
+
+  platforms:
+    - name: Debian
+      versions:
+        - all
+
+  galaxy_tags:
+    - Debian
+    - user

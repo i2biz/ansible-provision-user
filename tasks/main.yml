@@ -1,0 +1,36 @@
+---
+
+- name: create provision user
+  user:
+    name: "{{provision_user_name}}"
+    shell: "/bin/bash"
+    system: yes
+    password: "{{provision_user_password}}"
+  no_log: True
+
+- name: create .ssh
+  file:
+    path: "/home/{{provision_user_name}}/.ssh"
+    owner: "{{provision_user_name}}"
+    group: "{{provision_user_name}}"
+    mode: "700"
+    state: "directory"
+
+- fail:
+    msg: "Please set provision_user_authorized_keys"
+  when: provision_user_authorized_keys == None
+
+- name: update authorized keys
+  copy:
+    content: "{{ provision_user_authorized_keys }}"
+    dest: "/home/{{provision_user_name}}/.ssh/authorized_keys"
+    owner: "{{ provision_user_name }}"
+
+- name: install sudo
+  apt:
+    name: sudo
+
+- name: update sudoers
+  template:
+    src: provision_user.sudoers.d
+    dest: /etc/sudoers.d/provision_{{provision_user_name}}

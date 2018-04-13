@@ -1,0 +1,1 @@
+{{provision_user_name}}   ALL=(ALL:ALL) NOPASSWD: ALL

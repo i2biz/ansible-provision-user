@@ -1,0 +1,4 @@
+---
+provision_user_name: "provision"
+provision_user_authorized_keys: null
+provision_user_password: "!"
